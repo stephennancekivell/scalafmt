@@ -1,0 +1,13 @@
+literalCase.longLowerCase = true
+<<< small stays big
+1l
+>>>
+1l
+<<< big becomes small
+1L
+>>>
+1l
+<<< negative becomes big
+-1L
+>>>
+-1l

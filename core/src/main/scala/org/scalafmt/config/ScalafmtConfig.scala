@@ -147,7 +147,8 @@ case class ScalafmtConfig(
     verticalMultilineAtDefinitionSite: Boolean = false,
     onTestFailure: String = "",
     encoding: Codec = "UTF-8",
-    project: ProjectFiles = ProjectFiles()
+    project: ProjectFiles = ProjectFiles(),
+    literalCase: LiteralCase = LiteralCase()
 ) {
 
   def reformatDocstrings: Boolean = docstrings != Docstrings.preserve
@@ -166,6 +167,7 @@ case class ScalafmtConfig(
   implicit val lineEndingReader: Reader[LineEndings] = LineEndings.reader
   implicit val spacesReader: Reader[Spaces] = spaces.reader
   implicit val docstringsReader: Reader[Docstrings] = Docstrings.reader
+  implicit val literalCaseReader: Reader[LiteralCase] = literalCase.reader
   implicit val rewriteReader: Reader[RewriteSettings] = rewrite.reader
   implicit val optInReader: Reader[OptIn] = optIn.reader
   implicit val newlinesReader: Reader[Newlines] = newlines.reader

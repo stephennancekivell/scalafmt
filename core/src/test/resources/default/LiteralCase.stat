@@ -1,0 +1,19 @@
+80 columns                                                                     |
+<<< A mix of upper and lower case literals stay the same
+{
+  1L
+  2l
+  3d
+  4D
+  5f
+  6F
+}
+>>>
+{
+  1L
+  2l
+  3d
+  4D
+  5f
+  6F
+}

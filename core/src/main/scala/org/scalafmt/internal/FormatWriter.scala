@@ -2,7 +2,6 @@ package org.scalafmt.internal
 
 import scala.meta.Term
 import scala.meta.Tree
-import scala.meta.prettyprinters.Syntax
 import scala.meta.tokens.Token
 import scala.meta.tokens.Token._
 
@@ -27,7 +26,19 @@ class FormatWriter(formatOps: FormatOps) {
             sb.append(formatComment(c, state.indentation))
           case token @ Interpolation.Part(_) =>
             sb.append(formatMarginizedString(token, state.indentation))
-          case literal @ Constant.String(_) => // Ignore, see below.
+          case _: Constant.String => // Ignore, see below.
+          case Constant.Long(v) if formatOps.initStyle.literalCase.longUpperCase =>
+            sb.append(v).append("L")
+          case Constant.Long(v) if formatOps.initStyle.literalCase.longLowerCase =>
+            sb.append(v).append("l")
+          case Constant.Double(v) if formatOps.initStyle.literalCase.doubleUpperCase =>
+            sb.append(v).append("D")
+          case Constant.Double(v) if formatOps.initStyle.literalCase.doubleLowerCase =>
+            sb.append(v).append("d")
+          case Constant.Float(v) if formatOps.initStyle.literalCase.floatUpperCase =>
+            sb.append(v).append("F")
+          case Constant.Float(v) if formatOps.initStyle.literalCase.floatLowerCase =>
+            sb.append(v).append("f")
           case token =>
             val rewrittenToken =
               formatOps.initStyle.rewriteTokens

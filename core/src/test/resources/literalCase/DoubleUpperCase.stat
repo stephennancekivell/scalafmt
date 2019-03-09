@@ -1,0 +1,13 @@
+literalCase.doubleUpperCase = true
+<<< big stays big
+1D
+>>>
+1D
+<<< small becomes big
+1d
+>>>
+1D
+<<< negative becomes big
+-1d
+>>>
+-1D
