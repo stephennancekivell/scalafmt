@@ -1,0 +1,22 @@
+100 columns # configuration is defined at the top of the file
+<<< ONLY it should format with a conditional function
+class Sample {
+  def mkFunc(flag: Boolean): String => Boolean = {
+    if(flag) {
+      (v => true)
+    } else {
+      (v => false)
+    }
+  }
+}
+>>>
+class Sample {
+  def mkFunc(flag: Boolean)
+      : String => Boolean = {
+    if (flag) { (v =>
+      true)
+    } else { (v =>
+      false)
+    }
+  }
+}
