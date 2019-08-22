@@ -790,6 +790,35 @@ class CliTest extends AbstractCliTest with CliTestBehavior {
     )
   }
 
+  test("Running returning dynamic function 1409") {
+    val input =
+      s"""|/foo.scala
+          |class Sample {
+          | def mkFunc(flag: Boolean): String => Boolean = {
+          | if(flag) {
+          |      (v => true)
+          |    } else {
+          |      (v => false)
+          |    }
+          |  }
+          |}
+          |""".stripMargin
+    noArgTest(
+      string2dir(input),
+      input,
+      Seq(
+        Array("--debug") // debug options is needed to output running scalafmt version
+      ),
+      assertExit = { exit =>
+        //        assert(exit.isOk, exit)
+      },
+      assertOut = out => {
+        println(out)
+        assert(out.contains(Versions.version))
+      }
+    )
+  }
+
   test(
     "Running pre-resolved version of scalafmt if `version` setting is missing."
   ) {
